@@ -30,6 +30,10 @@ An example usage is as below:
 
 This will run a finetuning on the FALCON-7B model using 4 GPU workers, and the Alpaca instruction dataset. Feel free to adjust the arguments for your own purposes.
 
+When you are finished, you can turn off the cluster with:
+
+`ray down ray_cluster.yaml`
+
 ## Changing DeepSpeed configuration
 
 To tune the DeepSpeed configuration for your specific use case, edit the file on `config/deepspeed.json`. If you want to disable DeepSpeed, you can pass the `--no-deepspeed` parameter to the `finetune.py` script.
