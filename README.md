@@ -37,3 +37,10 @@ When you are finished, you can turn off the cluster with:
 ## Changing DeepSpeed configuration
 
 To tune the DeepSpeed configuration for your specific use case, edit the file on `config/deepspeed.json`. If you want to disable DeepSpeed, you can pass the `--no-deepspeed` parameter to the `finetune.py` script.
+
+# Datasets
+
+I have successfully fine-tuned FALCON-7B on the following 2 datasets:
+
+- Alpaca: [https://huggingface.co/datasets/bertin-project/alpaca-spanish](https://huggingface.co/datasets/yahma/alpaca-cleaned)
+- Alpaca Spanish: [https://huggingface.co/datasets/bertin-project/alpaca-spanish](https://huggingface.co/datasets/bertin-project/alpaca-spanish)
