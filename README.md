@@ -1,7 +1,7 @@
 # Finetuning Large Language Models Efficiently on a Distributed Cluster
 
 This repository is a boilerplate/fingerprint to fine tune any HuggingFace Large Language Model, such as FALCON-7B, using a distributed cluster.
-The purpose of this repo is to make it straightforward to fine tune any model efficiently by levearing multi-GPU training.
+The purpose of this repo is to make it straightforward to fine tune any model efficiently by leveraging multi-GPU training.
 It uses Ray AIR to orchestrate the cluster on AWS, and DeepSpeed for parameter+optimizer sharding + offloading.
 
 ## Setup
@@ -26,7 +26,7 @@ Now, to run a finetuning job, you can use the script `finetune.py` under `/src`.
 
 An example usage is as below:
 
-`python finetune.py --model="tiiuae/falcon-7b" --num-workers 4 --data alpaca_data_claned.json`
+`python finetune.py --model="tiiuae/falcon-7b" --num-workers 4 --data alpaca_data_cleaned.json`
 
 This will run a finetuning on the FALCON-7B model using 4 GPU workers, and the Alpaca instruction dataset. Feel free to adjust the arguments for your own purposes.
 
