@@ -1,0 +1,96 @@
+cluster_name: ray_cluster_gpu_aws_llm_finetuning
+
+max_workers: 8
+
+upscaling_speed: 1.0
+
+docker:
+    image: "rayproject/ray-ml:latest-gpu"
+    container_name: "ray_container"
+    pull_before_run: False
+    run_options:   # Extra options to pass into "docker run"
+        - --ulimit nofile=65536:65536
+
+    head_image: "rayproject/ray-ml:latest-gpu"
+    worker_image: "rayproject/ray-ml:latest-gpu"
+
+idle_timeout_minutes: 5
+
+provider:
+    type: aws
+    region: eu-west-2
+    cache_stopped_nodes: True
+
+auth:
+    ssh_user: ubuntu
+
+available_node_types:
+    head:
+        node_config:
+            InstanceType: g4dn.xlarge
+            ImageId: ami-0bacb0baeaa1dbf0b
+            BlockDeviceMappings:
+                - DeviceName: /dev/sda1
+                  Ebs:
+                      VolumeSize: 300
+                      VolumeType: gp3
+    worker:
+        min_workers: 2
+        max_workers: 8
+        node_config:
+            InstanceType: g4dn.xlarge
+            ImageId: ami-0bacb0baeaa1dbf0b
+            # Run workers on spot by default. Comment this out to use on-demand.
+            InstanceMarketOptions:
+                MarketType: spot
+                SpotOptions:
+                    MaxPrice: "1"  # Max Hourly Price
+            BlockDeviceMappings:
+                - DeviceName: /dev/sda1
+                  Ebs:
+                      VolumeSize: 300
+                      VolumeType: gp3
+
+
+file_mounts: {
+    "~/src": "./src",
+    "~/data": "./data",
+    "~/infra": "./infra",
+    "~/config": "./config",
+}
+
+file_mounts_sync_continuously: False
+
+cluster_synced_files: []
+
+rsync_exclude:
+    - "**/.git"
+    - "**/.git/**"
+
+rsync_filter:
+    - ".gitignore"
+
+head_node_type: head
+
+head_start_ray_commands:
+    - ulimit -n 65536
+    - conda activate py310 && ray stop
+    - conda activate py310 && ray start --head --port=6379 --object-manager-port=8076 --autoscaling-config=~/ray_bootstrap_config.yaml --dashboard-host=0.0.0.0
+
+worker_start_ray_commands:
+    - ulimit -n 65536
+    - conda activate py310 && ray stop
+    - conda activate py310 && ray start --address=$RAY_HEAD_IP:6379 --object-manager-port=8076
+
+initialization_commands: []
+
+head_setup_commands:
+    - conda activate py310 && pip install -U pip
+    - conda activate py310 && pip install -r infra/requirements.txt
+
+worker_setup_commands:
+    - conda activate py310 && pip install -U pip
+    - conda activate py310 && pip install -r infra/requirements.txt
+
+setup_commands:
+    - conda create -n py310 python=3.10 -y && conda activate py310

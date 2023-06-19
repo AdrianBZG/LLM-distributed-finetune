@@ -1,0 +1,16 @@
+appdirs==1.4.4
+datasets==2.12.0
+fire==0.5.0
+deepspeed==0.9.2
+sentencepiece==0.1.99
+accelerate @ git+https://github.com/huggingface/accelerate
+peft @ git+https://github.com/huggingface/peft@4fd374e80d670781c0d82c96ce94d1215ff23306
+transformers @ git+https://github.com/huggingface/transformers
+tensorboardX==2.6
+gradio==3.35.2
+einops==0.6.1
+torch==2.0.1
+bitsandbytes
+mlflow==2.4.1
+boto3
+ray[air]==2.5.0
