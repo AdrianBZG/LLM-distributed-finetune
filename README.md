@@ -42,5 +42,5 @@ To tune the DeepSpeed configuration for your specific use case, edit the file on
 
 I have successfully fine-tuned FALCON-7B on the following 2 datasets:
 
-- Alpaca: [https://huggingface.co/datasets/bertin-project/alpaca-spanish](https://huggingface.co/datasets/yahma/alpaca-cleaned)
+- Alpaca: [https://huggingface.co/datasets/yahma/alpaca-cleaned](https://huggingface.co/datasets/yahma/alpaca-cleaned)
 - Alpaca Spanish: [https://huggingface.co/datasets/bertin-project/alpaca-spanish](https://huggingface.co/datasets/bertin-project/alpaca-spanish)
