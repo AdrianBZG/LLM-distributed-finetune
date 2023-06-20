@@ -4,6 +4,8 @@ This repository is a boilerplate/fingerprint to fine tune any HuggingFace Large 
 The purpose of this repo is to make it straightforward to fine tune any model efficiently by leveraging multi-GPU training.
 It uses Ray AIR to orchestrate the cluster on AWS, and DeepSpeed for parameter+optimizer sharding + offloading.
 
+The following FALCON-7B model was fine-tuned using this repo: [https://huggingface.co/AdrianBZG/falcon-7b-spanish-8bit](https://huggingface.co/AdrianBZG/falcon-7b-spanish-8bit)
+
 ## Setup
 
 First, you need to clone the repo:
